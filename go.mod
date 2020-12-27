@@ -10,6 +10,7 @@ require (
 	github.com/gomodule/redigo v1.8.3 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/yuin/gopher-lua v0.0.0-20200816102855-ee81675732da // indirect
+	golang.org/x/tools/gopls v0.6.1 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/grpc v1.34.0
 	google.golang.org/protobuf v1.25.0

@@ -1,9 +1,10 @@
-package main
+package coverage
 
 import (
-	"github.com/alicebob/miniredis"
-	"github.com/roharon/rpdly-go-url/utils"
 	"testing"
+
+	"github.com/alicebob/miniredis"
+	redisutils "github.com/roharon/rpdly-go-url/utils/redis"
 )
 
 func TestRedisClient(t *testing.T) {
@@ -12,7 +13,6 @@ func TestRedisClient(t *testing.T) {
 		t.Errorf("an error '%s' was not expected when opening a stub database connection",
 			err)
 	}
-
 	client := redisutils.RedisClient(mr.Addr(), "")
 
 	testKey := "test:value"

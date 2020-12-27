@@ -2,12 +2,13 @@ package redisutils
 
 import (
 	"context"
+	"log"
+	"os"
+
 	"github.com/go-redis/redis/v8"
 	"github.com/joho/godotenv"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
-	"log"
-	"os"
 )
 
 var ctx = context.Background()
