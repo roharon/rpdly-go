@@ -6,7 +6,7 @@ jobs:
     strategy:
       matrix:
         go_version: [1.15.x]
-        os: [ubuntu-latest]
+        os: [ubuntu-18.04, ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Setup Go
@@ -23,7 +23,7 @@ jobs:
       - go_test
     strategy:
       matrix:
-        os: [ubuntu-latest]
+        os: [ubuntu-18.04, ubuntu-20.04]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout code
