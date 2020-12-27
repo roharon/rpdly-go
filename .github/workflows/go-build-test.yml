@@ -1,0 +1,32 @@
+name: go-build-test
+on: [push, pull_request]
+
+jobs:
+  go_test:
+    strategy:
+      matrix:
+        go_version: [1.15.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go_version }}
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Go Test
+        run: go test ./...
+
+  go_lint:
+    needs:
+      - go_test
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Go lint
+        uses: golangci/golangci-lint-action@v2
