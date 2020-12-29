@@ -35,7 +35,7 @@ func dialer() func(context.Context, string) (net.Conn, error) {
 	}
 }
 
-func TestSetUri(t *testing.T) {
+func TestGetSetUri(t *testing.T) {
 	mr, err := miniredis.Run()
 
 	os.Setenv("REDIS_ADDRESS", mr.Addr())
@@ -90,6 +90,10 @@ func TestSetUri(t *testing.T) {
 
 				if len(response.GetUri()) != val {
 					t.Errorf("Url LENGTH error ||Uri: %s expected Len:%d||", response.GetUri(), val)
+				}
+
+				if key, err := rds.Get(response.GetUri()); key != tt.uri || err != nil {
+					t.Error("redis Key is wrong")
 				}
 			}
 
