@@ -3,34 +3,34 @@ package redisutils
 import (
 	"context"
 	"log"
-	"os"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/joho/godotenv"
+	"github.com/roharon/rpdly-go-url/config"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 var ctx = context.Background()
 
-func RedisClient(addr string, password string) *redis.Client {
-	if addr == "" && password == "" {
-		_ = godotenv.Load("../.env")
-		addr = os.Getenv("redis_address")
-		password = os.Getenv("redis_password")
-	}
-
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     addr,
-		Password: password,
-		DB:       0,
-	})
-
-	return rdb
+type Redis struct {
+	rdb redis.Client
 }
 
-func Get(rdb *redis.Client, key string) (string, error) {
-	val, err := rdb.Get(ctx, key).Result()
+func RedisClient() Redis {
+	configuration := config.GetConfig()
+
+	rdb := redis.NewClient(&redis.Options{
+		Addr: configuration.REDIS_ADDRESS,
+		DB:   0,
+	})
+
+	return Redis{
+		rdb: *rdb,
+	}
+}
+
+func (rds *Redis) Get(key string) (string, error) {
+	val, err := rds.rdb.Get(ctx, key).Result()
 
 	if err == redis.Nil {
 		log.Printf("%s does not exist", key)
@@ -44,8 +44,8 @@ func Get(rdb *redis.Client, key string) (string, error) {
 	return val, nil
 }
 
-func Set(rdb *redis.Client, key string, value string) error {
-	err := rdb.Set(ctx, key, value, 0).Err()
+func (rds *Redis) Set(key string, value string) error {
+	err := rds.rdb.Set(ctx, key, value, 0).Err()
 
 	if err != nil {
 		return err
