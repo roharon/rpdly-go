@@ -5,12 +5,13 @@ option go_package = "protobuf/uri";
 
 service UriExchange {
   rpc GetUri(Request) returns (Response);
+  rpc SetUri(Request) returns (Response);
 }
 
 message Request {
-  string origin_uri = 1;
+  string uri = 1;
 }
 
 message Response {
-  string short_uri = 1;
+  string uri = 1;
 }

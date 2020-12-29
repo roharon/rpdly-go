@@ -1,11 +1,15 @@
 package main
 
 import (
-	"github.com/joho/godotenv"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"os"
+
+	"github.com/joho/godotenv"
+	handler "github.com/roharon/rpdly-go-url/handler"
+	pb "github.com/roharon/rpdly-go-url/protobuf/uri"
+
+	"google.golang.org/grpc"
 )
 
 func main() {
@@ -21,6 +25,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
+	pb.RegisterUriExchangeServer(s, &handler.RouteServer{})
 
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
