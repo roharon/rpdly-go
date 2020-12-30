@@ -88,13 +88,12 @@ func TestGetSetUri(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
-				val += len(handler.URL_PREFIX)
 
 				if len(response.GetUri()) != val {
 					t.Errorf("Url LENGTH error ||Uri: %s expected Len:%d||", response.GetUri(), val)
 				}
 
-				if key, err := rds.Get(response.GetUri()); key != tt.uri || err != nil {
+				if key, err := rds.Get(handler.URL_PREFIX + response.GetUri()); key != tt.uri || err != nil {
 					t.Error("redis Key is wrong")
 				}
 			}

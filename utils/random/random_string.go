@@ -1,8 +1,13 @@
 package randomutils
 
-import "math/rand"
+import (
+	"math/rand"
+	"time"
+)
 
 func RandomString(length int) string {
+	rand.Seed(time.Now().UnixNano())
+
 	letters := []rune("abcdefghijklmnopqrstuvwxyz" +
 		"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
 
@@ -11,6 +16,7 @@ func RandomString(length int) string {
 	}
 
 	randArray := make([]rune, length)
+
 	for i := range randArray {
 		randArray[i] = letters[rand.Intn(len(letters))]
 	}

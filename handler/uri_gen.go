@@ -42,9 +42,9 @@ func (s *RouteServer) SetUri(ctx context.Context, req *pb.Request) (*pb.Response
 		valInt = DEFAULT_LENGTH
 	}
 
-	shortUrl := URL_PREFIX + randomutils.RandomString(valInt)
+	shortUrl := randomutils.RandomString(valInt)
 
-	err = rds.Set(shortUrl, originUrl)
+	err = rds.Set(URL_PREFIX+shortUrl, originUrl)
 	if err != nil {
 		return &pb.Response{}, err
 	}
