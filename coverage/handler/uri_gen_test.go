@@ -88,6 +88,7 @@ func TestGetSetUri(t *testing.T) {
 				if err != nil {
 					t.Error(err)
 				}
+				val += len(handler.URL_PREFIX)
 
 				if len(response.GetUri()) != val {
 					t.Errorf("Url LENGTH error ||Uri: %s expected Len:%d||", response.GetUri(), val)

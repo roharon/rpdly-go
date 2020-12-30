@@ -13,10 +13,11 @@ import (
 type RouteServer struct{}
 
 const RANDOM_LENGTH = "URL:LENGTH"
+const URL_PREFIX = "URL:content:"
 const DEFAULT_LENGTH = 4
 
 func (s *RouteServer) GetUri(ctx context.Context, req *pb.Request) (*pb.Response, error) {
-	key := req.GetUri()
+	key := URL_PREFIX + req.GetUri()
 
 	rdb := redis.RedisClient()
 	val, err := rdb.Get(key)
@@ -41,7 +42,7 @@ func (s *RouteServer) SetUri(ctx context.Context, req *pb.Request) (*pb.Response
 		valInt = DEFAULT_LENGTH
 	}
 
-	shortUrl := randomutils.RandomString(valInt)
+	shortUrl := URL_PREFIX + randomutils.RandomString(valInt)
 
 	err = rds.Set(shortUrl, originUrl)
 	if err != nil {
