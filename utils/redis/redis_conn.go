@@ -20,8 +20,9 @@ func RedisClient() Redis {
 	configuration := config.GetConfig()
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: configuration.REDIS_ADDRESS,
-		DB:   0,
+		Addr:     configuration.REDIS_ADDRESS,
+		Password: configuration.REDIS_PASSWORD,
+		DB:       0,
 	})
 
 	return Redis{

@@ -14,6 +14,7 @@ type config struct {
 	SERVER_ADDRESS string `env:"SERVER_ADDRESS" envDefault:"0.0.0.0:3000"`
 	REDIS_ADDRESS  string `env:"REDIS_ADDRESS"`
 	REDIS_PASSWORD string `env:"REDIS_PASSWORD"`
+	PROXY_PORT     string `env:"PROXY_PORT" envDefault:":8081"`
 }
 
 var (
