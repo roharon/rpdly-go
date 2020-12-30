@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+
+package v1;
+option go_package = "protobuf/uri/v1";
+
+
+service UriExchange {
+  rpc GetUri(Request) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/uri/{uri}"
+    };
+  }
+
+  rpc SetUri(Request) returns (Response) {
+    option (google.api.http) = {
+      post: "/v1/uri",
+      body: "*"
+    };
+  }
+}
+
+message Request {
+  string uri = 1;
+}
+
+message Response {
+  string uri = 1;
+}

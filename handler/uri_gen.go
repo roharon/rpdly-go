@@ -7,7 +7,7 @@ import (
 	randomutils "github.com/roharon/rpdly-go-url/utils/random"
 	redis "github.com/roharon/rpdly-go-url/utils/redis"
 
-	pb "github.com/roharon/rpdly-go-url/protobuf/uri"
+	pb "github.com/roharon/rpdly-go-url/protobuf/uri/v1"
 )
 
 type RouteServer struct{}
