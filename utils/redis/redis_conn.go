@@ -19,11 +19,18 @@ type Redis struct {
 func RedisClient() Redis {
 	configuration := config.GetConfig()
 
-	rdb := redis.NewClient(&redis.Options{
-		Addr:     configuration.REDIS_ADDRESS,
-		Password: configuration.REDIS_PASSWORD,
-		DB:       0,
-	})
+	password := configuration.REDIS_PASSWORD
+
+	options := redis.Options{
+		Addr: configuration.REDIS_ADDRESS,
+		DB:   0,
+	}
+
+	if password != "" {
+		options.Password = password
+	}
+
+	rdb := redis.NewClient(&options)
 
 	return Redis{
 		rdb: *rdb,

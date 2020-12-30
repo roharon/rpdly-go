@@ -10,7 +10,7 @@ import (
 
 	"github.com/alicebob/miniredis"
 	"github.com/roharon/rpdly-go-url/handler"
-	pb "github.com/roharon/rpdly-go-url/protobuf/uri"
+	pb "github.com/roharon/rpdly-go-url/protobuf/uri/v1"
 	redis "github.com/roharon/rpdly-go-url/utils/redis"
 
 	"google.golang.org/grpc"
@@ -39,6 +39,7 @@ func TestGetSetUri(t *testing.T) {
 	mr, err := miniredis.Run()
 
 	os.Setenv("REDIS_ADDRESS", mr.Addr())
+	os.Setenv("REDIS_PASSWORD", "")
 	// set env for using redis on test
 
 	if err != nil {

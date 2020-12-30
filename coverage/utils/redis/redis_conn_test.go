@@ -10,6 +10,7 @@ import (
 
 func TestRedisClient(t *testing.T) {
 	mr, err := miniredis.Run()
+	os.Setenv("REDIS_PASSWORD", "")
 	if err != nil {
 		t.Errorf("an error '%s' was not expected when opening a stub database connection",
 			err)
